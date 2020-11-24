@@ -22,7 +22,7 @@
 
 **RF**
 
-[] - O usuário deve poder fazer um cadastro;
+[x] - O usuário deve poder fazer um cadastro;
 [] - O usuário deve poder editar seus dados;
 [] - O usuário deve poder desativar sua conta (exclusão lógica);
 

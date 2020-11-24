@@ -24,6 +24,9 @@ class User {
   @Column()
   adm: boolean;
 
+  @Column()
+  disabled: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 
