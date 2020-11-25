@@ -23,8 +23,8 @@
 **RF**
 
 [x] - O usuário deve poder fazer um cadastro;
-[] - O usuário deve poder editar seus dados;
-[] - O usuário deve poder desativar sua conta (exclusão lógica);
+[x] - O usuário deve poder editar seus dados;
+[x] - O usuário deve poder desativar sua conta (exclusão lógica);
 
 ## Filme
 

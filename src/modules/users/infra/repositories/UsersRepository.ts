@@ -34,6 +34,12 @@ class UsersRepository implements IUserRepository {
   public async save(user: User): Promise<User> {
     return this.usersRepository.save(user);
   }
+
+  public async update(id: string, user: Partial<User>): Promise<boolean> {
+    const updatedUser = await this.usersRepository.update(id, user);
+
+    return !!updatedUser.raw;
+  }
 }
 
 export default UsersRepository;
