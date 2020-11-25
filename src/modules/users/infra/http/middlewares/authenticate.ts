@@ -8,6 +8,7 @@ interface ITokenPayload {
   iat: number;
   exp: number;
   sub: string;
+  isAdm: boolean;
 }
 
 function authenticate(
@@ -24,10 +25,11 @@ function authenticate(
   try {
     const decoded = verify(token, authConfig.jwt.secret);
 
-    const { sub } = decoded as ITokenPayload;
+    const { sub, isAdm } = decoded as ITokenPayload;
 
     request.user = {
       id: sub,
+      isAdm,
     };
 
     return next();

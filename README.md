@@ -34,11 +34,11 @@
 
 **RF**
 
-[] - O adm deve poder cadastrar um novo filme
+[x] - O adm deve poder cadastrar um novo filme
 [] - Um filme terá uma contagem de votos
 [] - Os filmes poderão ser listados por: diretor, nome, gênero e atores
 
 **RN**
 
-[] - Somente o adm pode cadastrar um novo filme
+x] - Somente o adm pode cadastrar um novo filme
 [] - O voto será contabilizado de 0-4 pelo usuário

@@ -4,11 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  AfterInsert,
 } from 'typeorm';
 
-@Entity('users')
-class User {
+@Entity('movies')
+class Movie {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -16,27 +15,16 @@ class User {
   name: string;
 
   @Column()
-  email: string;
+  director: string;
 
   @Column()
-  password: string;
-
-  @Column()
-  adm: boolean;
-
-  @Column()
-  disabled: boolean;
+  genre: string;
 
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
-
-  @AfterInsert()
-  hiddenPassword(): void {
-    delete this.password;
-  }
 }
 
-export default User;
+export default Movie;
