@@ -18,9 +18,9 @@
 
 **RF**
 
-[] - Deve ser possível cadastrar um novo adm
-[] - Deve ser possível editar um adm
-[] - Deve ser possível desativar um adm (exclusão lógica)
+[ ] - Deve ser possível cadastrar um novo adm
+[ ] - Deve ser possível editar um adm
+[ ] - Deve ser possível desativar um adm (exclusão lógica)
 
 ## Usuário
 
@@ -35,10 +35,10 @@
 **RF**
 
 [x] - O adm deve poder cadastrar um novo filme
-[] - Um filme terá uma contagem de votos
-[] - Os filmes poderão ser listados por: diretor, nome, gênero e atores
+[x] - Um filme terá uma contagem de votos
+[ ] - Os filmes poderão ser listados por: diretor, nome, gênero e atores
 
 **RN**
 
-x] - Somente o adm pode cadastrar um novo filme
-[] - O voto será contabilizado de 0-4 pelo usuário
+[x] - Somente o adm pode cadastrar um novo filme
+[x] - O voto será contabilizado de 0-4 pelo usuário
