@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   AfterInsert,
+  AfterLoad,
 } from 'typeorm';
 
 @Entity('users')
