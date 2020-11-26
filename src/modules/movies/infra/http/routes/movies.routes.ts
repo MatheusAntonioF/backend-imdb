@@ -7,6 +7,7 @@ import MovieController from '../controllers/MovieController';
 const moviesRouter = Router();
 const movieController = new MovieController();
 
+moviesRouter.get('/', movieController.index);
 moviesRouter.post('/', authenticate, adminisrator, movieController.create);
 
 export default moviesRouter;

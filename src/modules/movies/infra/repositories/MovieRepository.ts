@@ -2,6 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 
 import IMovieRepository from '@modules/movies/repositories/IMovieRepository';
 import IMovieCreate from '@modules/movies/dtos/IMovieCreate';
+
 import Movie from '../entities/Movie';
 
 class MovieRepository implements IMovieRepository {
@@ -15,6 +16,16 @@ class MovieRepository implements IMovieRepository {
     const findedMovie = await this.movieRepository.findOne(id);
 
     return findedMovie;
+  }
+
+  public async findMovies(filterBy: string, value: string): Promise<Movie[]> {
+    const filteredMovies = await this.movieRepository
+      .createQueryBuilder('movies')
+      .where(`movies.${filterBy} = :${filterBy}`)
+      .setParameter(filterBy, value)
+      .getMany();
+
+    return filteredMovies;
   }
 
   public async findByName(name: string): Promise<Movie | undefined> {
