@@ -10,7 +10,7 @@ interface IRequest {
   name: string;
   email: string;
   password: string;
-  adm: boolean;
+  adm?: boolean;
 }
 @injectable()
 class CreateUserService {
@@ -23,7 +23,7 @@ class CreateUserService {
     name,
     email,
     password,
-    adm = false,
+    adm,
   }: IRequest): Promise<User> {
     const checkUserExists = await this.usersRepository.findByEmail(email);
 
