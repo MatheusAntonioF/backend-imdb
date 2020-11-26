@@ -4,7 +4,11 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
+  JoinColumn,
 } from 'typeorm';
+
+import Vote from './Vote';
 
 @Entity('movies')
 class Movie {
@@ -19,6 +23,10 @@ class Movie {
 
   @Column()
   genre: string;
+
+  @OneToMany(() => Vote, vote => vote.movie)
+  @JoinColumn({ name: 'votes', referencedColumnName: 'movie_id' })
+  votes: Vote[];
 
   @CreateDateColumn()
   created_at: Date;

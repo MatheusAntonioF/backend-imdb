@@ -7,6 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
+
 import User from '@modules/users/infra/entities/User';
 import Movie from './Movie';
 
@@ -22,10 +23,11 @@ class Vote {
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User;
 
-  @Column()
+  @Column({ name: 'movie_id' })
   movie_id: string;
 
-  @ManyToOne(() => Movie, movie => movie.id)
+  // N votos <-> 1 filme
+  @ManyToOne(() => Movie, movie => movie.votes)
   @JoinColumn({ name: 'movie_id', referencedColumnName: 'id' })
   movie: Movie;
 
