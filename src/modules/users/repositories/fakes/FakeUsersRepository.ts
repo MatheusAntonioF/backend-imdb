@@ -36,7 +36,7 @@ class UsersRepository implements IUserRepository {
     return user;
   }
 
-  public async update(id: string, user: Partial<User>): Promise<boolean> {
+  public async update(id: string, user: Partial<User>): Promise<User> {
     const findedUser = this.users.find(userToFind => userToFind.id === id);
 
     const updatedUser = Object.assign(findedUser, user);
@@ -46,7 +46,7 @@ class UsersRepository implements IUserRepository {
       return userToFilter;
     });
 
-    return !!updatedUser;
+    return updatedUser;
   }
 }
 

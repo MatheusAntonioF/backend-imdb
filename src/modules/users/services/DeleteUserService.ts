@@ -9,7 +9,7 @@ interface IRequest {
   user_id: string;
 }
 @injectable()
-class CreateUserService {
+class DeleteUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUserRepository
@@ -28,4 +28,4 @@ class CreateUserService {
   }
 }
 
-export default CreateUserService;
+export default DeleteUserService;

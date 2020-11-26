@@ -29,11 +29,11 @@ class AuthenticateUserService {
   public async execute({ email, password }: IRequestDTO): Promise<IResponse> {
     const findedUser = await this.usersRepository.findByEmail(email);
 
-    if (!findedUser) throw new AppError('Email or password was incorrect');
+    if (!findedUser) throw new AppError('Email was incorrect');
 
     const passwordMatch = await compare(password, findedUser.password);
 
-    if (!passwordMatch) throw new AppError('Email or password was incorrect');
+    if (!passwordMatch) throw new AppError('Password was incorrect');
 
     const { expiresIn, secret } = authConfig.jwt;
 

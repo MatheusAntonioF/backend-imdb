@@ -35,10 +35,12 @@ class UsersRepository implements IUserRepository {
     return this.usersRepository.save(user);
   }
 
-  public async update(id: string, user: Partial<User>): Promise<boolean> {
-    const updatedUser = await this.usersRepository.update(id, user);
+  public async update(id: string, user: Partial<User>): Promise<User> {
+    await this.usersRepository.update(id, user);
 
-    return !!updatedUser.raw;
+    const updatedUser = (await this.findById(id)) as User;
+
+    return updatedUser;
   }
 }
 

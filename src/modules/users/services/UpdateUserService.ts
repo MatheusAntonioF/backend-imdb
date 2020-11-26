@@ -14,7 +14,7 @@ interface IRequest {
 }
 
 @injectable()
-class CreateUserService {
+class UpdateUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUserRepository
@@ -22,8 +22,18 @@ class CreateUserService {
 
   public async execute(
     userData: IRequest
-  ): Promise<Omit<User, 'hiddenPassword'> | undefined> {
+  ): Promise<Omit<User, 'hiddenPassword'>> {
     const findedUser = await this.usersRepository.findById(userData.id);
+
+    let findedUserByEmail;
+
+    if (userData.email) {
+      findedUserByEmail = await this.usersRepository.findByEmail(
+        userData.email
+      );
+    }
+
+    if (findedUserByEmail) throw new AppError('This email is not available');
 
     if (!findedUser) throw new AppError('User does not found', 400);
 
@@ -34,16 +44,15 @@ class CreateUserService {
       newPassword = findedUser.password;
     }
 
-    const updatedUser = Object.assign(findedUser, userData, {
-      password: newPassword,
-    });
-
-    await this.usersRepository.update(userData.id, {
-      ...userData,
-    });
+    const updatedUser = await this.usersRepository.update(
+      userData.id,
+      Object.assign(findedUser, userData, {
+        password: newPassword,
+      })
+    );
 
     return updatedUser;
   }
 }
 
-export default CreateUserService;
+export default UpdateUserService;
