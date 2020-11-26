@@ -12,7 +12,7 @@
 
 ## Autenticação
 
-[x] - Autenticação no formato JWT
+- [x] Autenticação no formato JWT
 
 ## Administrador
 
