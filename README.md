@@ -7,7 +7,7 @@
 1. Baixar a imagem do postgres diretamente do dockerhub e exeuta-lá
 
     ```bash
-    docker run --name some-postgres -e POSTGRES_PASSWORD=docker -d postgres
+    docker run --name imdb_db -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
     ```
 
     > Por padrão o username é: postgres
