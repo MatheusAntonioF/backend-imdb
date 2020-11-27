@@ -34,7 +34,10 @@ describe('GetMovie', () => {
 
     let newVote;
 
-    newVote = await new CreateVoteService(fakeVoteRepository).execute({
+    newVote = await new CreateVoteService(
+      fakeVoteRepository,
+      fakeUserRepository
+    ).execute({
       user_id,
       movie_id,
       vote: 2,
@@ -42,7 +45,10 @@ describe('GetMovie', () => {
 
     await fakeMovieRepository.addVoteToMovie(newVote);
 
-    newVote = await new CreateVoteService(fakeVoteRepository).execute({
+    newVote = await new CreateVoteService(
+      fakeVoteRepository,
+      fakeUserRepository
+    ).execute({
       user_id,
       movie_id,
       vote: 2,

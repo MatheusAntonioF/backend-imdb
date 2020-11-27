@@ -30,7 +30,10 @@ describe('CreateVote', () => {
       genre: 'Adventure',
     });
 
-    const createVoteService = new CreateVoteService(fakeVoteRepository);
+    const createVoteService = new CreateVoteService(
+      fakeVoteRepository,
+      fakeUserRepository
+    );
 
     const createdVote = await createVoteService.execute({
       user_id,
@@ -63,7 +66,7 @@ describe('CreateVote', () => {
     });
 
     expect(
-      new CreateVoteService(fakeVoteRepository).execute({
+      new CreateVoteService(fakeVoteRepository, fakeUserRepository).execute({
         user_id,
         movie_id,
         vote: 7,
@@ -92,7 +95,10 @@ describe('CreateVote', () => {
       genre: 'Adventure',
     });
 
-    const createVoteService = new CreateVoteService(fakeVoteRepository);
+    const createVoteService = new CreateVoteService(
+      fakeVoteRepository,
+      fakeUserRepository
+    );
 
     const createdVote = await createVoteService.execute({
       user_id,
@@ -107,5 +113,41 @@ describe('CreateVote', () => {
     });
 
     expect(createdVote.vote).toBe(1);
+  });
+
+  it('should not be able to adm user vote', async () => {
+    const fakeVoteRepository = new FakeVoteRepository();
+    const fakeUserRepository = new FakeUserRepository();
+    const fakeMovieRepository = new FakeMovieRepository();
+
+    const { id: user_id } = await new CreateUserService(
+      fakeUserRepository
+    ).execute({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: 'some-password',
+      adm: true,
+    });
+
+    const { id: movie_id } = await new CreateMovieService(
+      fakeMovieRepository
+    ).execute({
+      name: 'Some Movie Name',
+      director: 'John Doe',
+      genre: 'Adventure',
+    });
+
+    const createVoteService = new CreateVoteService(
+      fakeVoteRepository,
+      fakeUserRepository
+    );
+
+    expect(
+      createVoteService.execute({
+        user_id,
+        movie_id,
+        vote: 1,
+      })
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
