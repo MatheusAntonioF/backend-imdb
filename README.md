@@ -51,8 +51,6 @@
 
     ![doc1](https://user-images.githubusercontent.com/40186689/100471154-70d42880-30b8-11eb-963d-8e4d68745771.png)
 
-    Insomnia
-
     1.2 Selecione o arquivo em:  ./insominia/documentation/insomnia.json, e importe ele nesta tela:
 
     ![doc2](https://user-images.githubusercontent.com/40186689/100471186-7e89ae00-30b8-11eb-95aa-4297f9c479cf.png)
