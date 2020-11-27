@@ -177,3 +177,9 @@ Você deverá criar uma API que o site [IMDb](https://www.imdb.com/) irá consul
   2. https://sailsjs.com/
 
 - Guideline rails http://guides.rubyonrails.org/index.html
+
+
+### ⚗️ Coverage Report
+
+![teste](https://user-images.githubusercontent.com/40186689/100471661-79792e80-30b9-11eb-8173-29700a49ef09.jpeg)
+
