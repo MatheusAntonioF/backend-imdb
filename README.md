@@ -2,7 +2,7 @@
 
 ---
 
-## 🔥Como executar a aplicação
+## 🔥 Como executar a aplicação
 
 1. Baixar a imagem do postgres diretamente do dockerhub e exeuta-lá
 
@@ -34,6 +34,28 @@
     ```bash
     yarn dev:server
     ```
+
+---
+
+## 🧐 Iniciar a documentação da api
+
+1. Executar o script no diretório raiz da aplicação:
+
+    ```bash
+    yarn start:documentation
+    ```
+
+    > Port padrão a documentação será executada na porta 5000
+
+    1.1 (opcional) Para importar os arquivos para o Insomnia(Testar a aplicação), clique em Import/Export
+
+    ![doc1](https://user-images.githubusercontent.com/40186689/100471154-70d42880-30b8-11eb-963d-8e4d68745771.png)
+
+    Insomnia
+
+    1.2 Selecione o arquivo em:  ./insominia/documentation/insomnia.json, e importe ele nesta tela:
+
+    ![doc2](https://user-images.githubusercontent.com/40186689/100471186-7e89ae00-30b8-11eb-95aa-4297f9c479cf.png)
 
 ---
 
