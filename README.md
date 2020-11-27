@@ -1,5 +1,42 @@
 # API do IMDB
 
+---
+
+## 🔥Como executar a aplicação
+
+1. Baixar a imagem do postgres diretamente do dockerhub e exeuta-lá
+
+    ```bash
+    docker run --name some-postgres -e POSTGRES_PASSWORD=docker -d postgres
+    ```
+
+    > Por padrão o username é: postgres
+
+2. Criar banco de dados com o nome: imdb
+3. Dentro do diretório raiz no projeto, execute: 
+
+    ```bash
+    yarn typeorm migration:run
+    ```
+
+4. Instalar todas as dependências (yarn ou npm): 
+
+    ```bash
+    yarn 
+    ```
+
+    ```bash
+    npm install
+    ```
+
+5. Rodar a aplicação (por padrão ela vai ser iniciada na porta 3333): 
+
+    ```bash
+    yarn dev:server
+    ```
+
+---
+
 **RNF**
 
 - Typescript.
