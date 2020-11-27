@@ -48,10 +48,12 @@ class MovieRepository implements IMovieRepository {
     return this.movieRepository.save(movie);
   }
 
-  public async update(id: string, movie: Partial<Movie>): Promise<boolean> {
-    const updatedMovie = await this.movieRepository.update(id, movie);
+  public async update(id: string, movie: Partial<Movie>): Promise<Movie> {
+    await this.movieRepository.update(id, movie);
 
-    return !!updatedMovie.raw;
+    const updatedMovie = (await this.movieRepository.findOne(id)) as Movie;
+
+    return updatedMovie;
   }
 }
 

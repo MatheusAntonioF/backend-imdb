@@ -7,5 +7,5 @@ export default interface IMovieRepository {
   findMovies(filterBy: string, value: string): Promise<Movie[]>;
   create(data: IMovieCreate): Promise<Movie>;
   save(user: Movie): Promise<Movie>;
-  update(id: string, movie: Partial<Movie>): Promise<boolean>;
+  update(id: string, movie: Partial<Movie>): Promise<Movie>;
 }

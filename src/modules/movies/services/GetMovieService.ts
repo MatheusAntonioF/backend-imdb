@@ -15,7 +15,7 @@ class GetMovieService {
     private moviesRepository: IMovieRepository
   ) {}
 
-  public async execute(id: string): Promise<IResponse | undefined> {
+  public async execute(id: string): Promise<IResponse> {
     const findedMovie = await this.moviesRepository.findById(id);
 
     if (!findedMovie) throw new AppError('Movie does not found');

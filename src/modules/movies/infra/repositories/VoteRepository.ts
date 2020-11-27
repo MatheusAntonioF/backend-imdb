@@ -19,7 +19,7 @@ class VoteRepository implements IVoteRepository {
     return createdVote;
   }
 
-  async save(vote: IVoteCreate): Promise<Vote> {
+  async save(vote: Vote): Promise<Vote> {
     const createdVote = await this.voteRepository.save(vote);
 
     return createdVote;

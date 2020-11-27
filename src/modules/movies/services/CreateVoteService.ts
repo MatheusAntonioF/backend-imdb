@@ -26,11 +26,11 @@ class CreateVoteService {
 
     if (findedVote) {
       newVote = Object.assign(findedVote, { vote });
+
+      await this.votesRepository.save(newVote);
     } else {
       newVote = await this.votesRepository.create({ user_id, movie_id, vote });
     }
-
-    await this.votesRepository.create(newVote);
 
     return newVote;
   }
