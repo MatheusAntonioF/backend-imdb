@@ -44,7 +44,6 @@
 - [x] Somente o adm pode cadastrar um novo filme
 - [x] O voto será contabilizado de 0-4 pelo usuário
 
-
 # Sobre
 
 Estes documento README tem como objetivo fornecer as informações necessárias para realização do projeto de avaliação de candidatos.
