@@ -5,12 +5,16 @@ import FakeUserRepository from '../repositories/fakes/FakeUsersRepository';
 import UpdateUserService from './UpdateUserService';
 import User from '../infra/entities/User';
 
+let fakeUserRepository: FakeUserRepository;
+let updateUserService: UpdateUserService;
+
 describe('UpdateUser', () => {
+  beforeEach(() => {
+    fakeUserRepository = new FakeUserRepository();
+    updateUserService = new UpdateUserService(fakeUserRepository);
+  });
+
   it('should be able to update a user', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-
-    const updateUserService = new UpdateUserService(fakeUserRepository);
-
     const user = await fakeUserRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
@@ -25,10 +29,6 @@ describe('UpdateUser', () => {
   });
 
   it('should not be able to update user if that non exists', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-
-    const updateUserService = new UpdateUserService(fakeUserRepository);
-
     const updatedUser = { id: 'User non existent' } as User;
 
     expect(updateUserService.execute(updatedUser)).rejects.toBeInstanceOf(
@@ -37,10 +37,6 @@ describe('UpdateUser', () => {
   });
 
   it('should be able to get the password if some password is not passed', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-
-    const updateUserService = new UpdateUserService(fakeUserRepository);
-
     const user = await fakeUserRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
@@ -56,10 +52,6 @@ describe('UpdateUser', () => {
   });
 
   it('should be able to update a password to user', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-
-    const updateUserService = new UpdateUserService(fakeUserRepository);
-
     const user = await fakeUserRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
@@ -77,10 +69,6 @@ describe('UpdateUser', () => {
   });
 
   it('should not be able to updated email if this email was have exists', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-
-    const updateUserService = new UpdateUserService(fakeUserRepository);
-
     const user = await fakeUserRepository.create({
       name: 'John Doe',
       email: 'email-existent@example.com',

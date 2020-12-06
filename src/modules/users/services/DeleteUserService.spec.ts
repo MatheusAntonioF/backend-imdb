@@ -2,12 +2,16 @@ import AppError from '@shared/errors/AppError';
 import FakeUserRepository from '../repositories/fakes/FakeUsersRepository';
 import DeleteUserService from './DeleteUserService';
 
+let fakeUserRepository: FakeUserRepository;
+let deleteUserService: DeleteUserService;
+
 describe('DeleteUser', () => {
+  beforeEach(() => {
+    fakeUserRepository = new FakeUserRepository();
+    deleteUserService = new DeleteUserService(fakeUserRepository);
+  });
+
   it('should be able to delete a new user', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-
-    const deleteUserService = new DeleteUserService(fakeUserRepository);
-
     const { id: user_id } = await fakeUserRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
@@ -20,10 +24,6 @@ describe('DeleteUser', () => {
   });
 
   it('should not be able to delete user if that non exists', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-
-    const deleteUserService = new DeleteUserService(fakeUserRepository);
-
     expect(
       deleteUserService.execute({
         user_id: 'non-existing-id',

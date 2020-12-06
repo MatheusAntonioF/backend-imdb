@@ -8,32 +8,38 @@ import CreateVoteService from './CreateVoteService';
 import FakeMovieRepository from '../repositories/fakes/FakeMovieRepository';
 import CreateMovieService from './CreateMovieService';
 
-describe('CreateVote', () => {
-  it('should be able to create a new vote', async () => {
-    const fakeVoteRepository = new FakeVoteRepository();
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeMovieRepository = new FakeMovieRepository();
+let fakeVoteRepository: FakeVoteRepository;
+let fakeUserRepository: FakeUserRepository;
+let fakeMovieRepository: FakeMovieRepository;
+let createUserService: CreateUserService;
+let createMovieService: CreateMovieService;
+let createVoteService: CreateVoteService;
 
-    const { id: user_id } = await new CreateUserService(
+describe('CreateVote', () => {
+  beforeEach(() => {
+    fakeVoteRepository = new FakeVoteRepository();
+    fakeUserRepository = new FakeUserRepository();
+    fakeMovieRepository = new FakeMovieRepository();
+    createUserService = new CreateUserService(fakeUserRepository);
+    createMovieService = new CreateMovieService(fakeMovieRepository);
+    createVoteService = new CreateVoteService(
+      fakeVoteRepository,
       fakeUserRepository
-    ).execute({
+    );
+  });
+
+  it('should be able to create a new vote', async () => {
+    const { id: user_id } = await createUserService.execute({
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: 'some-password',
     });
 
-    const { id: movie_id } = await new CreateMovieService(
-      fakeMovieRepository
-    ).execute({
+    const { id: movie_id } = await createMovieService.execute({
       name: 'Some Movie Name',
       director: 'John Doe',
       genre: 'Adventure',
     });
-
-    const createVoteService = new CreateVoteService(
-      fakeVoteRepository,
-      fakeUserRepository
-    );
 
     const createdVote = await createVoteService.execute({
       user_id,
@@ -45,28 +51,20 @@ describe('CreateVote', () => {
   });
 
   it('should not be able to create a vote if it is not between 1 and 4', async () => {
-    const fakeVoteRepository = new FakeVoteRepository();
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeMovieRepository = new FakeMovieRepository();
-
-    const { id: user_id } = await new CreateUserService(
-      fakeUserRepository
-    ).execute({
+    const { id: user_id } = await createUserService.execute({
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: 'some-password',
     });
 
-    const { id: movie_id } = await new CreateMovieService(
-      fakeMovieRepository
-    ).execute({
+    const { id: movie_id } = await createMovieService.execute({
       name: 'Some Movie Name',
       director: 'John Doe',
       genre: 'Adventure',
     });
 
     expect(
-      new CreateVoteService(fakeVoteRepository, fakeUserRepository).execute({
+      createVoteService.execute({
         user_id,
         movie_id,
         vote: 7,
@@ -75,30 +73,17 @@ describe('CreateVote', () => {
   });
 
   it('should be able to update the vote if it exists', async () => {
-    const fakeVoteRepository = new FakeVoteRepository();
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeMovieRepository = new FakeMovieRepository();
-
-    const { id: user_id } = await new CreateUserService(
-      fakeUserRepository
-    ).execute({
+    const { id: user_id } = await createUserService.execute({
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: 'some-password',
     });
 
-    const { id: movie_id } = await new CreateMovieService(
-      fakeMovieRepository
-    ).execute({
+    const { id: movie_id } = await createMovieService.execute({
       name: 'Some Movie Name',
       director: 'John Doe',
       genre: 'Adventure',
     });
-
-    const createVoteService = new CreateVoteService(
-      fakeVoteRepository,
-      fakeUserRepository
-    );
 
     const createdVote = await createVoteService.execute({
       user_id,
@@ -116,31 +101,18 @@ describe('CreateVote', () => {
   });
 
   it('should not be able to adm user vote', async () => {
-    const fakeVoteRepository = new FakeVoteRepository();
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeMovieRepository = new FakeMovieRepository();
-
-    const { id: user_id } = await new CreateUserService(
-      fakeUserRepository
-    ).execute({
+    const { id: user_id } = await createUserService.execute({
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: 'some-password',
       adm: true,
     });
 
-    const { id: movie_id } = await new CreateMovieService(
-      fakeMovieRepository
-    ).execute({
+    const { id: movie_id } = await createMovieService.execute({
       name: 'Some Movie Name',
       director: 'John Doe',
       genre: 'Adventure',
     });
-
-    const createVoteService = new CreateVoteService(
-      fakeVoteRepository,
-      fakeUserRepository
-    );
 
     expect(
       createVoteService.execute({

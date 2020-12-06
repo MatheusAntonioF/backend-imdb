@@ -2,12 +2,16 @@ import AppError from '@shared/errors/AppError';
 import FakeMovieRepository from '../repositories/fakes/FakeMovieRepository';
 import CreateMovieService from './CreateMovieService';
 
+let fakeMovieRepository: FakeMovieRepository;
+let createMovieService: CreateMovieService;
+
 describe('CreateMovie', () => {
+  beforeEach(() => {
+    fakeMovieRepository = new FakeMovieRepository();
+    createMovieService = new CreateMovieService(fakeMovieRepository);
+  });
+
   it('should be able to create movie', async () => {
-    const fakeMovieRepository = new FakeMovieRepository();
-
-    const createMovieService = new CreateMovieService(fakeMovieRepository);
-
     const createdMovie = await createMovieService.execute({
       name: 'Someone name movie',
       director: 'Someone Director',
@@ -19,10 +23,6 @@ describe('CreateMovie', () => {
   });
 
   it('should not be able to create movie with the name existing', async () => {
-    const fakeMovieRepository = new FakeMovieRepository();
-
-    const createMovieService = new CreateMovieService(fakeMovieRepository);
-
     await createMovieService.execute({
       name: 'Someone name movie',
       director: 'Someone Director',

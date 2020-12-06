@@ -2,12 +2,16 @@ import AppError from '@shared/errors/AppError';
 import FakeMovieRepository from '../repositories/fakes/FakeMovieRepository';
 import FilterMovieService from './FilterMovieService';
 
+let fakeMovieRepository: FakeMovieRepository;
+let filterMovieService: FilterMovieService;
+
 describe('FilterMovie', () => {
+  beforeEach(() => {
+    fakeMovieRepository = new FakeMovieRepository();
+    filterMovieService = new FilterMovieService(fakeMovieRepository);
+  });
+
   it('should be able to filter movie', async () => {
-    const fakeMovieRepository = new FakeMovieRepository();
-
-    const filterMovieService = new FilterMovieService(fakeMovieRepository);
-
     await fakeMovieRepository.create({
       name: 'Someone name movie',
       director: 'Someone Director',
@@ -22,10 +26,6 @@ describe('FilterMovie', () => {
   });
 
   it('should not be able to filter movie to invalid param', async () => {
-    const fakeMovieRepository = new FakeMovieRepository();
-
-    const filterMovieService = new FilterMovieService(fakeMovieRepository);
-
     await fakeMovieRepository.create({
       name: 'Someone name movie',
       director: 'Someone Director',
